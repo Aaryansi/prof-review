@@ -3,13 +3,13 @@ import { getCourses, getProfessors } from "../utils/firestore";
 import { db } from "../config/firebase";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 
-export default function FeedbackForm({ initialCourse, initialProfessor }) {
+export default function FeedbackForm({ initialCourse = "", initialProfessor = "" }) {
   const [departments, setDepartments] = useState([]);
   const [courses, setCourses] = useState([]);
   const [professors, setProfessors] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState("");
-  const [selectedCourse, setSelectedCourse] = useState(initialCourse || "");
-  const [selectedProfessor, setSelectedProfessor] = useState(initialProfessor || "");
+  const [selectedCourse, setSelectedCourse] = useState(initialCourse);
+  const [selectedProfessor, setSelectedProfessor] = useState(initialProfessor);
   const [comments, setComments] = useState("");
   const [tags, setTags] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -35,7 +35,7 @@ export default function FeedbackForm({ initialCourse, initialProfessor }) {
 
   // Filter professors when course is selected
   const filteredProfessors = selectedCourse
-    ? professors.filter((p) => p.courses.includes(selectedCourse))
+    ? professors.filter((p) => p.courses?.includes(selectedCourse))
     : professors;
 
   const handleSubmit = async (e) => {
@@ -54,7 +54,7 @@ export default function FeedbackForm({ initialCourse, initialProfessor }) {
         courseId: selectedCourse,
         professorId: selectedProfessor || null,
         comments,
-        tags,
+        tags: tags || [], // Ensure it's always an array
         timestamp: Timestamp.now(),
       });
 
@@ -82,7 +82,11 @@ export default function FeedbackForm({ initialCourse, initialProfessor }) {
           <select
             className="w-full mt-1 p-3 rounded-md border bg-white focus:ring-2 focus:ring-red-500"
             value={selectedDepartment}
-            onChange={(e) => setSelectedDepartment(e.target.value)}
+            onChange={(e) => {
+              setSelectedDepartment(e.target.value);
+              setSelectedCourse(""); // Reset course when department changes
+              setSelectedProfessor(""); // Reset professor
+            }}
           >
             <option value="">Select Department</option>
             {departments.map((dept) => (
@@ -136,7 +140,7 @@ export default function FeedbackForm({ initialCourse, initialProfessor }) {
                 key={tag}
                 type="button"
                 className={`px-3 py-2 rounded-lg text-sm ${
-                  tags.includes(tag) ? "bg-red-600 text-white" : "bg-gray-200 text-gray-700"
+                  tags?.includes(tag) ? "bg-red-600 text-white" : "bg-gray-200 text-gray-700"
                 }`}
                 onClick={() =>
                   setTags((prev) => (prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]))

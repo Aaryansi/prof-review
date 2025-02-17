@@ -8,82 +8,75 @@ firebase_admin.initialize_app(cred)
 # Firestore database instance
 db = firestore.client()
 
-# Biochemistry (CHEM) courses list
-biochem_courses = [
-    {"code": "CHEM 111", "name": "General Chemistry I"},
-    {"code": "CHEM 111L", "name": "General Chemistry I Laboratory"},
-    {"code": "CHEM 112", "name": "Chemistry Honors"},
-    {"code": "CHEM 113", "name": "General Chemistry II"},
-    {"code": "CHEM 113L", "name": "General Chemistry II Laboratory"},
-    {"code": "CHEM 115", "name": "General Chemistry III"},
-    {"code": "CHEM 115L", "name": "General Chemistry III Laboratory"},
-    {"code": "CHEM 199", "name": "Professional Experience"},
-    {"code": "CHEM 200", "name": "Career Preparation"},
-    {"code": "CHEM 210", "name": "Chemistry of Poisons and Potions"},
-    {"code": "CHEM 211", "name": "Chemistry of Food and Cooking"},
-    {"code": "CHEM 212", "name": "Chemistry of Sport"},
-    {"code": "CHEM 213", "name": "Chemistry of Art"},
-    {"code": "CHEM 225", "name": "Analytical Chemistry"},
-    {"code": "CHEM 225L", "name": "Analytical Chemistry Laboratory"},
-    {"code": "CHEM 251", "name": "Organic Chemistry I"},
-    {"code": "CHEM 251L", "name": "Organic Chemistry I Laboratory"},
-    {"code": "CHEM 252", "name": "Organic Chemistry II"},
-    {"code": "CHEM 252L", "name": "Organic Chemistry II Laboratory"},
-    {"code": "CHEM 253", "name": "Organic Chemistry III"},
-    {"code": "CHEM 253L", "name": "Organic Chemistry III Laboratory"},
-    {"code": "CHEM 270", "name": "Special Topics in Chemistry"},
-    {"code": "CHEM 276", "name": "Special Topics in Chemistry with Laboratory"},
-    {"code": "CHEM 290", "name": "Chemical Research"},
-    {"code": "CHEM 291", "name": "Introduction to Chemical Research"},
-    {"code": "CHEM 326", "name": "Bioanalytical Chemistry"},
-    {"code": "CHEM 327", "name": "Advanced Analytical Chemistry"},
-    {"code": "CHEM 330", "name": "Biochemistry I"},
-    {"code": "CHEM 331", "name": "Biochemistry II"},
-    {"code": "CHEM 360", "name": "Introduction to Physical Chemistry for Engineers"},
-    {"code": "CHEM 361", "name": "Physical Chemistry I"},
-    {"code": "CHEM 362", "name": "Physical Chemistry II"},
-    {"code": "CHEM 391", "name": "Research Proposal"},
-    {"code": "CHEM 395", "name": "Chemistry Seminar"},
-    {"code": "CHEM 420", "name": "Electronics for Scientists"},
-    {"code": "CHEM 421", "name": "Biochemical Mass Spectrometry"},
-    {"code": "CHEM 422", "name": "Fluorescence Spectroscopy"},
-    {"code": "CHEM 423", "name": "NMR Spectroscopy"},
-    {"code": "CHEM 424", "name": "Absorption Spectroscopy"},
-    {"code": "CHEM 425", "name": "Raman Spectroscopy"},
-    {"code": "CHEM 426", "name": "Microfluidics"},
-    {"code": "CHEM 427", "name": "HPLC"},
-    {"code": "CHEM 428", "name": "Trace Metal Detection"},
-    {"code": "CHEM 429", "name": "Capillary Electrophoresis"},
-    {"code": "CHEM 430", "name": "Advanced Biochemistry"},
-    {"code": "CHEM 433", "name": "Biochemistry Laboratory"},
-    {"code": "CHEM 441", "name": "Inorganic Chemistry I"},
-    {"code": "CHEM 442", "name": "Inorganic Chemistry II"},
-    {"code": "CHEM 451", "name": "Organic Structure Determination"},
-    {"code": "CHEM 463", "name": "Quantum Chemistry & Molecular Spectroscopy"},
-    {"code": "CHEM 470", "name": "Special Topics in Chemistry"},
-    {"code": "CHEM 476", "name": "Special Topics in Chemistry with Laboratory"},
-    {"code": "CHEM 477", "name": "Directed Study in Chemistry"},
-    {"code": "CHEM 490", "name": "Chemical Research Rotation"},
-    {"code": "CHEM 491", "name": "Senior Thesis"},
-    {"code": "CHEM 495", "name": "Chemistry Seminar"},
-    {"code": "CHEM 496", "name": "Chemistry Seminar"},
-    {"code": "CHEM 497", "name": "Senior Presentation"},
-    {"code": "CHEM 499", "name": "Independent Chemical Research"},
+# Biology (BIO) Courses
+engd_courses = [
+    {"code": "ENGD 100", "name": "Design and Communication Studio"},
+    {"code": "ENGD 101", "name": "Representations of Design Studio"},
+    {"code": "ENGD 102", "name": "Design Realization Studio"},
+    {"code": "ENGD 103", "name": "Designing for Disabilities Studio"},
+    {"code": "ENGD 110", "name": "Circuits, Software Development, and Societal Impact Design Studio"},
+    {"code": "ENGD 111", "name": "Science, Technology, and Society in Design"},
+    {"code": "ENGD 112", "name": "DC Circuits"},
+    {"code": "ENGD 113", "name": "Software Development Principles I"},
+    {"code": "ENGD 120", "name": "Integrating Electrical, Software, and Societal Systems"},
+    {"code": "ENGD 121", "name": "Science, Technology, and Society in Design"},
+    {"code": "ENGD 122", "name": "AC Circuits"},
+    {"code": "ENGD 123", "name": "Software Development Principles II"},
+    {"code": "ENGD 150", "name": "Independent Design Project"},
+    {"code": "ENGD 151", "name": "Problem Solving and Data Representation"},
+    {"code": "ENGD 190", "name": "Selected Topics in Engineering Design"},
+    {"code": "ENGD 199", "name": "Professional Experience"},
+    {"code": "ENGD 240", "name": "User Experience Design Studio"},
+    {"code": "ENGD 241", "name": "Technical Communication in Design"},
+    {"code": "ENGD 242", "name": "Design Thinking"},
+    {"code": "ENGD 243", "name": "Software Development Principles III"},
+    {"code": "ENGD 250", "name": "Human Computer Interfaces Studio"},
+    {"code": "ENGD 251", "name": "Technical Communication in Design II"},
+    {"code": "ENGD 252", "name": "Design of Human-Computer Interfaces"},
+    {"code": "ENGD 253", "name": "Software Development Principles"},
+    {"code": "ENGD 260", "name": "Product Design Studio"},
+    {"code": "ENGD 270", "name": "Vertically Integrated Project I"},
+    {"code": "ENGD 271", "name": "Design Testing"},
+    {"code": "ENGD 290", "name": "Selected Topics in Engineering Design"},
+    {"code": "ENGD 300", "name": "Engineering Practicum I"},
+    {"code": "ENGD 301", "name": "Creative Design Practicum"},
+    {"code": "ENGD 302", "name": "Human Factors Practicum"},
+    {"code": "ENGD 303", "name": "Systems Architecture Practicum"},
+    {"code": "ENGD 304", "name": "Material Properties Practicum"},
+    {"code": "ENGD 305", "name": "Material Selection Practicum"},
+    {"code": "ENGD 308", "name": "Lean Manufacturing Process Fundamental Practicum"},
+    {"code": "ENGD 309", "name": "Lean Manufacturing Kaizen Fundamentals Practicum"},
+    {"code": "ENGD 310", "name": "Design for Assembly Practicum"},
+    {"code": "ENGD 311", "name": "Tolerance Analysis and Application Practicum"},
+    {"code": "ENGD 312", "name": "Design for Sheet Metal Fabrication Practicum"},
+    {"code": "ENGD 313", "name": "Design for Metal Forming Practicum"},
+    {"code": "ENGD 314", "name": "Curves, Surfaces, and Parametric, Equation-Based Design Practicum"},
+    {"code": "ENGD 315", "name": "Measuring User Experience Practicum"},
+    {"code": "ENGD 316", "name": "Facilities Management"},
+    {"code": "ENGD 390", "name": "Selected Topics in Engineering Design"},
+    {"code": "ENGD 410", "name": "Capstone Design I"},
+    {"code": "ENGD 490", "name": "Selected Topics in Engineering Design"},
 ]
 
-# Upload courses to Firestore
-def upload_courses():
+# Chemistry (CHEM) Courses (Already provided)
+
+
+# Function to upload courses
+def upload_courses(course_list, department):
     courses_ref = db.collection("courses")
-    for course in biochem_courses:
+    for course in course_list:
         course_data = {
-            "department": "Chemistry & Biochemistry",
+            "department": department,
             "name": course["name"],
             "code": course["code"]
         }
-        # Create a document with the course code as the ID
+        # Use course code as document ID
         courses_ref.document(course["code"]).set(course_data)
-        print(f"Added: {course['code']} - {course['name']}")
+        print(f"✅ Added: {course['code']} - {course['name']} ({department})")
 
 if __name__ == "__main__":
-    upload_courses()
-    print("✅ All courses uploaded successfully!")
+    print("\n🚀 Uploading Engineering Design (ENGD) courses...")
+    upload_courses(engd_courses, "Engineering Design")
+    
+
+    print("\n✅ All courses uploaded successfully!")
