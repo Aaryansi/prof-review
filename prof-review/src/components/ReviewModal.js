@@ -19,10 +19,7 @@ export default function ReviewModal({ item, reviews, type, onClose }) {
             <p className="text-gray-500 mt-4">No reviews yet.</p>
           )}
   
-          <button
-            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-            onClick={() => window.location.href = `/review?${type}=${item.id}`}
-          >
+          <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
             Submit a Review
           </button>
         </div>

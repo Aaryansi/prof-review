@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div className="bg-white relative">
       
-      {/* Navbar */}
+      {/* Navbar
       <header className="absolute inset-x-0 top-0 z-50">
         <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
           <div className="flex lg:flex-1">
@@ -26,7 +26,7 @@ export default function Home() {
             </Link>
           </div>
         </nav>
-      </header>
+      </header> */}
 
       {/* Hero Section */}
       <div className="relative isolate px-6 pt-20 lg:px-8">

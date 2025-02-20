@@ -1,6 +1,6 @@
 import { db } from "../config/firebase";
 import { 
-  collection, getDocs, doc, getDoc, query, where, addDoc, deleteDoc 
+  collection, getDocs, doc, getDoc, query, where, addDoc, deleteDoc, updateDoc // Added updateDoc
 } from "firebase/firestore";
 
 /** 📌 Fetch all courses */
@@ -81,11 +81,37 @@ export const submitReview = async (reviewData) => {
   }
 };
 
-/** 📌 Delete a review by ID */
+
+
+export const getAllReviews = async () => {
+  try {
+    const querySnapshot = await getDocs(collection(db, "reviews"));
+    return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  } catch (error) {
+    console.error("Error fetching all reviews:", error);
+    return [];
+  }
+};
+
+
+
+/** 📌 Update Review */
+export const updateReview = async (reviewId, updatedData) => {
+  try {
+    const reviewRef = doc(db, "reviews", reviewId);
+    await updateDoc(reviewRef, updatedData);
+    console.log("Review updated successfully");
+  } catch (error) {
+    console.error("Error updating review:", error);
+    throw error;
+  }
+};
+
+/** 📌 Delete Review */
 export const deleteReview = async (reviewId) => {
   try {
     await deleteDoc(doc(db, "reviews", reviewId));
-    console.log("Review deleted:", reviewId);
+    console.log("Review deleted successfully");
   } catch (error) {
     console.error("Error deleting review:", error);
     throw error;
