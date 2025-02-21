@@ -5,6 +5,7 @@ import { auth } from "../config/firebaseConfig";
 
 import { signInWithCustomToken } from "firebase/auth";
 
+
 const RoseLogin = () => {
   const [error, setError] = useState(null);  // Corrected type definition
   const [loading, setLoading] = useState(false);

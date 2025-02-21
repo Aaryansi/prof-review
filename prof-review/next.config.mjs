@@ -1,4 +1,6 @@
-export default {
-    basePath: "/prof-review",
-  };
-  
+const nextConfig = {
+  output: "export",
+
+};
+
+export default nextConfig;
